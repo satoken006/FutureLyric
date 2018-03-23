@@ -1,3 +1,6 @@
+var fourier_chars = [];
+var DEG_MAX = 10;
+
 // Output Lyric
 var app_output = function(p){
 
@@ -53,7 +56,7 @@ var app_input = function(p){
             char_stroke[last].p_list = list2;
         }
 
-        p.checkStrokeCount();
+        // p.checkStrokeCount();
     }
 
     p.sendStrokes = function(){
@@ -73,22 +76,24 @@ var app_input = function(p){
         fourier_chars.push( fourier_list );
         char_stroke = [];
 
+        console.log(fourier_chars);
+
     }
 
     p.deleteLastStroke = function(){
         char_stroke.pop();
-        p.checkStrokeCount();
+        // p.checkStrokeCount();
     }
 
-    p.checkStrokeCount = function(){
-        if( fourier_chars.length == 0 ) return;
+    // p.checkStrokeCount = function(){
+    //     if( fourier_chars.length == 0 ) return;
 
-        if( fourier_chars[0].length == char_stroke.length ){
-            setColorEnable();
-        }else{
-            setColorDisable();
-        }
-    }
+    //     if( fourier_chars[0].length == char_stroke.length ){
+    //         setColorEnable();
+    //     }else{
+    //         setColorDisable();
+    //     }
+    // }
 }
 
 
