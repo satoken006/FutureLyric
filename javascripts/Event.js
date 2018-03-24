@@ -1,5 +1,5 @@
 $(function(){
     $("#sendButton").click(function(){
-        canvas_input.sendStrokes();
+        fourier_list = canvas_input.getFourierList();
     });
 });
