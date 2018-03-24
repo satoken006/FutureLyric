@@ -1,4 +1,5 @@
 var fourier_chars = [];
+var stroke_list = [];
 var DEG_MAX = 10;
 
 // Output Lyric
@@ -7,6 +8,110 @@ var app_output = function(p){
     p.setup = function(){
         p.createCanvas(600, 400);
         p.background(128, 128);
+    }
+
+    p.draw = function(){
+        /**
+         * determine Fourier series to visualize in output frame
+         */
+        var fourier_charW = [];
+        var charW = [];
+
+        switch(fourier_chars.length){
+            case 0:
+                return;
+            case 1:
+                fourier_char1 = fourier_chars[0];
+                // 1ストロークごとに復元する
+                // console.log(fourier_char1);
+
+                for(let si = 0; si < fourier_char1.length; si ++){
+                    var stroke1 = new Stroke();
+                    stroke1.p_list = fourier_char1[si].restorePoints();
+
+                    var pl = stroke1.p_list;
+                    for(let pi = 0; pi < pl.length; pi++){
+                        p.point( pl[pi].x, pl[pi].y );
+                    }
+                }
+        }
+
+        // switch(fourier_chars.length){
+        //     case 0:
+        //         return;
+
+        //     case 1:
+        //         for(let si = 0; si < fourier_char1.length; si++){
+        //             let fourier1 = fourier_char1[si];
+        //             fourier_charW.push( fourier1 );
+        //             var strokeW = new Stroke();
+        //             strokeW.p_list = fourier1.restorePoints();
+        //             charW.push( strokeW );
+        //         }
+        //         break;
+
+        //     default:
+        //         animeFrameCount++;
+
+        //         if( animeFrameCount % SECTION == 0 ){
+        //             replaceChars();
+        //         }
+
+        //         for(let si = 0; si < fourier_char1.length; si++){
+        //             let fourier1 = fourier_char1[si];
+        //             let fourier2 = fourier_char2[si];
+        //             let len_pointsW = parseInt(fourier1.len_points * (1-_ratio) + fourier2.len_points * _ratio);
+        //             var fourierW = new Fourier( len_pointsW );
+
+        //             for(let k = 0; k < fourier1.m_aX.length; k++){
+        //                 let w_aX = fourier1.m_aX[k] * (1-_ratio) + fourier2.m_aX[k] * _ratio;
+        //                 let w_aY = fourier1.m_aY[k] * (1-_ratio) + fourier2.m_aY[k] * _ratio;
+        //                 let w_bX = fourier1.m_bX[k] * (1-_ratio) + fourier2.m_bX[k] * _ratio;
+        //                 let w_bY = fourier1.m_bY[k] * (1-_ratio) + fourier2.m_bY[k] * _ratio;
+        //                 fourierW.m_aX[k] = w_aX;
+        //                 fourierW.m_aY[k] = w_aY;
+        //                 fourierW.m_bX[k] = w_bX;
+        //                 fourierW.m_bY[k] = w_bY;
+        //             }
+        //             fourier_charW.push( fourierW );
+
+        //             var strokeW = new Stroke();
+        //             strokeW.p_list = fourierW.restorePoints();
+        //             charW.push( strokeW );
+        //         }
+
+        //         _ratio += parseFloat(1) / SECTION;
+        //         break;
+        // }
+
+        /**
+        * draw strokes and circular motions
+        */
+        // p.strokeWeight(1);
+        // p.colorMode(p.HSB, 100);
+        // p.noFill();
+        // for(let i = 0; i < fourier_charW.length; i++){
+        //     p.strokeWeight(2.5);
+        //     var col = parseFloat(i * 100) / fourier_charW.length;
+        //     p.stroke(col, 100, 100);
+        //     let list = charW[i].p_list;
+        //     for(let pi = 0; pi < list.length; pi++){
+        //         p.point( list[pi].x, list[pi].y );
+        //     }
+
+        //     var f = fourier_charW[i];
+        //     var t = 2 * Math.PI * (p.frameCount % SECTION)/SECTION - Math.PI;
+
+        //     p.push();
+        //     p.translate( f.m_aX[0]/2, p.height * 3/4 );
+        //     p.nextWheelX(1, f, t);
+        //     p.pop();
+        //     p.push();
+        //     p.translate( p.width * 3/4, f.m_aY[0]/2 );
+        //     p.nextWheelY(1, f, t);
+        //     p.pop();
+        // }
+        
     }
 
 }
