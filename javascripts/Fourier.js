@@ -43,13 +43,16 @@ Fourier.prototype.expandFourierSeries = function( _arrayPt, _iMaxDegree ){
 /**
  * restore array of points from Frouier series
  */
-Fourier.prototype.restorePoints = function(){
+Fourier.prototype.restorePoints = function(_p){
     var _listPt = [];
     var k_MAX = this.m_aX.length-1;
     
     for( var pi = 0 ; pi < this.len_points ; pi ++ ){
         var p_restored = new Point(0, 0);
         var t = 2 * Math.PI * pi/this.len_points - Math.PI;
+
+        var f1 = 0;
+        var f2 = 0;
 
         p_restored.x += this.m_aX[0]/2;
         p_restored.y += this.m_aY[0]/2;
@@ -58,7 +61,18 @@ Fourier.prototype.restorePoints = function(){
             p_restored.x += this.m_bX[k] * Math.sin(k*t);
             p_restored.y += this.m_aY[k] * Math.cos(k*t);
             p_restored.y += this.m_bY[k] * Math.sin(k*t);
+
+            f1 += k * (this.m_aX[k] * Math.sin(k*t) * (-1));
+            f1 += k * (this.m_bX[k] * Math.cos(k*t));
+            f2 += k * (this.m_aY[k] * Math.sin(k*t) * (-1));
+            f2 += k * (this.m_bY[k] * Math.cos(k*t));
         }
+
+        //console.log(_p.frameCount);
+
+        p_restored.x += 5*Math.sin(t*20 + _p.frameCount * 10 * Math.PI/180) * (-1) * f2 / Math.sqrt( Math.pow(f1, 2)+Math.pow(f2, 2) );
+        p_restored.y += 5*Math.sin(t*20 + _p.frameCount * 10 * Math.PI/180) * f1 / Math.sqrt( Math.pow(f1, 2)+Math.pow(f2, 2) );
+
         _listPt.push(p_restored);
     }
     

@@ -1,26 +1,30 @@
+
+
 var fourier_list = [];
 var DEG_MAX = 10;
 
 // Output Lyric
 var app_output = function(p){
+    var vid;
 
     p.setup = function(){
-        p.createCanvas(600, 400);
-        p.background(128, 128);
+        var canvas_output = p.createCanvas(600, 400);
         p.strokeWeight(3);
+
+        txt = p.createDiv("<iframe src='https://www.youtube.com/embed/mjzNJlOr4lg?&autoplay=1' frameborder='0'></iframe>");
+        txt.position(0, 0);
     }
 
     p.draw = function(){
-        // console.log(fourier_list);
+        p.background(255, 0);
 
         for(let fi = 0; fi < fourier_list.length; fi ++){
             var stroke1 = new Stroke();
-            stroke1.p_list = fourier_list[fi].restorePoints();
-
-            console.log(stroke1.p_list);
+            stroke1.p_list = fourier_list[fi].restorePoints(p);
+            // console.log(stroke1.p_list);
 
             var pl = stroke1.p_list;
-            for(let pi = 0; pi < pl.length; pi++){
+            for(let pi = 0; pi < pl.length/2; pi++){
                 p.point( pl[pi].x, pl[pi].y );
             }
         }
@@ -121,5 +125,5 @@ function Stroke(){
 }
 
 
-var canvas_input  = new p5(  app_input,  "canvas_input" );
 var canvas_output = new p5( app_output, "canvas_output" );
+var canvas_input  = new p5(  app_input,  "canvas_input" );
