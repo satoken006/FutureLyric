@@ -70,8 +70,8 @@ Fourier.prototype.restorePoints = function(_p){
 
         //console.log(_p.frameCount);
 
-        p_restored.x += 5*Math.sin(t*20 + _p.frameCount * 10 * Math.PI/180) * (-1) * f2 / Math.sqrt( Math.pow(f1, 2)+Math.pow(f2, 2) );
-        p_restored.y += 5*Math.sin(t*20 + _p.frameCount * 10 * Math.PI/180) * f1 / Math.sqrt( Math.pow(f1, 2)+Math.pow(f2, 2) );
+        p_restored.x += 2.5*Math.sin(t*20 + _p.frameCount * 10 * Math.PI/180) * (-1) * f2 / Math.sqrt( Math.pow(f1, 2)+Math.pow(f2, 2) );
+        p_restored.y += 2.5*Math.sin(t*20 + _p.frameCount * 10 * Math.PI/180) * f1 / Math.sqrt( Math.pow(f1, 2)+Math.pow(f2, 2) );
 
         _listPt.push(p_restored);
     }

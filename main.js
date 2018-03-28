@@ -1,21 +1,16 @@
-
-
 var fourier_list = [];
 var DEG_MAX = 10;
 
 // Output Lyric
 var app_output = function(p){
-    var vid;
 
     p.setup = function(){
         var canvas_output = p.createCanvas(600, 400);
         p.strokeWeight(3);
-
-        txt = p.createDiv("<iframe src='https://www.youtube.com/embed/mjzNJlOr4lg?&autoplay=1' frameborder='0'></iframe>");
-        txt.position(0, 0);
     }
 
     p.draw = function(){
+        p.clear();
         p.background(255, 0);
 
         for(let fi = 0; fi < fourier_list.length; fi ++){
@@ -89,10 +84,9 @@ var app_input = function(p){
             var list = stroke_list[i].p_list;
             f.expandFourierSeries(list, DEG_MAX);
             fourier_list.push(f);
-            f.restorePoints();
         }
+        // console.log(fourier_list);
         stroke_list = [];
-        console.log(fourier_list);
 
         return fourier_list;
     }
